@@ -14,10 +14,10 @@
   Cross-Origin-Resource-Policy: same-origin
   X-Frame-Options: DENY
 
-# HTML: always revalidate so copy fixes go live immediately
-/*.html
+# Pages are served as /, /packages/ and /plans/ — always revalidate so copy
+# fixes go live immediately. Assets keep the long cache (rule below wins).
+/*
   Cache-Control: public, max-age=0, must-revalidate
 
-# Static assets: long cache. Rename the file when you change one, or drop this.
 /assets/*
   Cache-Control: public, max-age=604800
