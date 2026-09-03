@@ -620,7 +620,15 @@ details[open]:not(.faq-closing) summary{color:var(--navy)}
 .field input,.field select{
   width:100%;min-height:46px;padding:11px 13px;
   border:1px solid var(--line);border-radius:var(--r-sm);background:#fff;
+  /* the base rule sets color:inherit, and this form sits inside .cta-band which
+     is white-on-navy — without this, typed text is white on a white field */
+  color:var(--ink);
   font-size:15px;transition:border-color .18s var(--ease),box-shadow .18s var(--ease)
+}
+.field select{
+  appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%235A6B7D' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6.5 8 10.5l4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;background-size:15px
 }
 .field input:focus,.field select:focus{
   outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,171,250,.16)
