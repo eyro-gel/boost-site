@@ -1,0 +1,23 @@
+# Cloudflare Pages / Netlify header rules.
+# CSP is tight because the site has no inline script, no inline style and no
+# inline event handlers — verified. The only external origin is Google Fonts.
+# If you self-host the fonts, drop the two fonts.* entries and it becomes 'self' only.
+
+/*
+  X-Robots-Tag: noindex, nofollow
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; media-src 'self'; connect-src 'self'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Frame-Options: DENY
+
+# HTML: always revalidate so copy fixes go live immediately
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Static assets: long cache. Rename the file when you change one, or drop this.
+/assets/*
+  Cache-Control: public, max-age=604800

@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# local scratch — never commit working files
+_verify/
+_export*/
+_probe.html
+_nojs*.html
+_og.html
+_strip.html
+_team.html

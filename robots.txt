@@ -1,0 +1,3 @@
+# Review deployment — not the live site. Do not index.
+User-agent: *
+Disallow: /

@@ -1,0 +1,6 @@
+/* Loaded only via <noscript>. Anything JavaScript would normally reveal or
+   populate is shown up-front instead, so the page is fully readable without it. */
+.rv{opacity:1 !important;transform:none !important}
+.fam-view[hidden]{display:block !important}
+.fam-view + .fam-view{margin-top:44px}
+.gauge .val{stroke-dashoffset:139 !important}   /* the 42/100 arc */
