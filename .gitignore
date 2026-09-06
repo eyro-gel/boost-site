@@ -17,3 +17,8 @@ _nojs*.html
 _og.html
 _strip.html
 _team.html
+
+# internal — never deploy. These are working documents, not site files;
+# anything matching this stays out of the repo and therefore out of Pages.
+_internal/
+*-internal.*
