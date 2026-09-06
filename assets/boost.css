@@ -32,7 +32,11 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+  /* the sticky header is ~105px tall, so without this an anchor jump parks the
+     target underneath it — below 1024px every in-page link landed on a heading
+     that was already hidden, which reads as a link pointing at the wrong place */
+  scroll-padding-top:104px}
 body{
   margin:0;
   background:var(--paper);
@@ -639,7 +643,9 @@ details[open]:not(.faq-closing) summary{color:var(--navy)}
 /* ============================ FOOTER ============================ */
 .ftr{background:var(--ink);color:rgba(255,255,255,.66);padding-block:clamp(56px,6vw,80px) 30px}
 .ftr-main{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,52px)}
-.ftr-brand img{width:132px;height:auto}
+/* 140 not 132: the logo file carries its own clear space, so the mark itself
+   renders at ~94% of the box */
+.ftr-brand img{width:140px;height:auto}
 .ftr-tag{
   font-family:"Space Grotesk",sans-serif;font-size:22px;font-weight:700;
   color:#fff;letter-spacing:-.02em;margin:20px 0 12px
