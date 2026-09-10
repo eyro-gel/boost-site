@@ -1,0 +1,15 @@
+# Cloudflare Pages redirect rules.
+#
+# Send www to the bare domain so the two can never both serve the site and
+# compete as duplicates. 301, not 302: this is permanent, and search engines
+# only pass ranking through a permanent redirect.
+#
+# PREREQUISITE: www.boost-tourism.co must be attached to this Pages project as
+# a second custom domain. Until it is, the hostname does not resolve at all and
+# nothing ever reaches Pages for this rule to act on.
+https://www.boost-tourism.co/*  https://boost-tourism.co/:splat  301
+
+# Nothing here for paths on purpose. Pages already normalises /packages to
+# /packages/, /packages.html to /packages/ and /index.html to / by itself —
+# verified against the live site. Restating those would only add rules that
+# can drift out of step with what Pages does anyway.
