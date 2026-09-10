@@ -11,7 +11,9 @@ HIDE='<meta name="robots" content="noindex, nofollow">'
 # every page, not just the root one — packages/ and plans/ live in their own
 # directories now that the URLs are clean, and a root-only glob silently left
 # them noindex at launch
-pages() { find . -name '*.html' -not -path './.git/*'; }
+# build output and internal docs are not pages — skip them, or a stale
+# _upload/ gets toggled instead of rebuilt
+pages() { find . -name '*.html' -not -path './.git/*' -not -path './_upload/*' -not -path './_internal/*'; }
 
 case "$MODE" in
   on)
