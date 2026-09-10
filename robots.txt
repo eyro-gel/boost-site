@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://boost.builtbyaero.dev/sitemap.xml
+Sitemap: https://boost-tourism.co/sitemap.xml
