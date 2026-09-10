@@ -12,6 +12,8 @@
 # local scratch — never commit working files
 _verify/
 _export*/
+_upload/
+boost-site-upload.zip
 _probe.html
 _nojs*.html
 _og.html
