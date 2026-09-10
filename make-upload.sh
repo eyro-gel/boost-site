@@ -18,7 +18,7 @@ mkdir -p "$OUT"
 
 # everything the served site needs, and nothing else
 cp -R assets "$OUT"/
-cp index.html favicon.ico robots.txt sitemap.xml _headers _redirects "$OUT"/
+cp index.html 404.html favicon.ico robots.txt sitemap.xml _headers _redirects "$OUT"/
 mkdir -p "$OUT/packages" "$OUT/plans"
 cp packages/index.html "$OUT/packages"/
 cp plans/index.html "$OUT/plans"/

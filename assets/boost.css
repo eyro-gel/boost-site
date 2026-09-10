@@ -914,3 +914,16 @@ details[open]:not(.faq-closing) summary{color:var(--navy)}
 }
 
 .cta-book{margin-top:30px}
+
+/* ==== NOT FOUND ==== */
+/* Pages serves 404.html with a real 404 status for any unmatched path. Without
+   it the platform answers every unknown URL with the homepage and a 200, which
+   search engines read as a soft 404 and index as duplicate content. */
+.nf{min-height:100svh;display:grid;place-items:center;padding:40px 0;background:var(--soft)}
+.nf-in{text-align:center;max-width:58ch;margin:0 auto}
+.nf-brand{display:inline-block;width:120px;margin-bottom:34px}
+.nf-brand img{width:100%;height:auto}
+.nf h1{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
+.nf .lede{margin:0 auto 30px;max-width:46ch}
+.nf-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
+.nf-links .tlink{margin:0}

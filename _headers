@@ -1,9 +1,17 @@
-# Cloudflare Pages / Netlify header rules.
+# Cloudflare Pages header rules.
+#
+# One rule per path pattern. Pages APPENDS values when two matching rules set
+# the same header rather than letting the later one win — a Cache-Control in
+# /* plus another in /assets/* produced the literal header
+#   public, max-age=0, must-revalidate, public, max-age=604800
+# and browsers take the first max-age they parse, so assets were revalidating
+# on every request instead of caching for a week. So /* carries no
+# Cache-Control at all, and the caching rules use patterns that cannot overlap.
+#
 # CSP is tight because the site has no inline script, no inline style and no
 # inline event handlers — verified. The only external origin is Google Fonts.
 # img-src allows data: for two CSS background SVGs: the hero's route line and
 # the select chevron, which appearance:none removes and this replaces.
-# If you self-host the fonts, drop the two fonts.* entries and it becomes 'self' only.
 
 /*
   Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; upgrade-insecure-requests
@@ -15,9 +23,12 @@
   Cross-Origin-Resource-Policy: same-origin
   X-Frame-Options: DENY
 
-# Pages are served as /, /packages/ and /plans/ — always revalidate so copy
-# fixes go live immediately. Assets keep the long cache (rule below wins).
-/*
+# fingerprint-free filenames, so revalidate rather than risk serving stale copy
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/packages/
+  Cache-Control: public, max-age=0, must-revalidate
+/plans/
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/*
