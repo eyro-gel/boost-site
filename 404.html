@@ -6,7 +6,13 @@
 <!-- Google Analytics. The config half lives in assets/analytics.js rather than
      inline, so script-src stays free of 'unsafe-inline'. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P61MXR28SM"></script>
-<script src="/assets/analytics.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P61MXR28SM');
+</script>
 <title>Page not found | BOOST</title>
 <meta name="description" content="That page is not here. Find BOOST's plans, packages and free trial instead.">
 <meta name="theme-color" content="#FFFFFF">

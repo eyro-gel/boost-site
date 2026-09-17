@@ -6,7 +6,13 @@
 <!-- Google Analytics. The config half lives in assets/analytics.js rather than
      inline, so script-src stays free of 'unsafe-inline'. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P61MXR28SM"></script>
-<script src="/assets/analytics.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P61MXR28SM');
+</script>
 <title>Tourism Marketing Agency in South-East Asia | BOOST</title>
 <meta name="description" content="BOOST fixes the four places a traveller decides — search, Maps, reviews and your booking page. Web, SEO and social for hotels, restaurants, spas and tours. Free 1-week trial.">
 <meta name="theme-color" content="#FFFFFF">

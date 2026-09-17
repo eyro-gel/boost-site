@@ -6,7 +6,13 @@
 <!-- Google Analytics. The config half lives in assets/analytics.js rather than
      inline, so script-src stays free of 'unsafe-inline'. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P61MXR28SM"></script>
-<script src="/assets/analytics.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P61MXR28SM');
+</script>
 <title>One-Off Website, SEO & Social Media Packages | BOOST</title>
 <meta name="description" content="Fixed-scope, fixed-fee packages for tourism businesses: website builds, SEO setup and social media launch. Three levels, no contract, everything stays in your accounts.">
 <meta name="theme-color" content="#FFFFFF">

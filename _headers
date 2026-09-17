@@ -16,11 +16,16 @@
 # The Google Analytics origins are Google's own documented CSP list. GA needs
 # three directives, not just script-src: the loader is a script, the measurement
 # beacons are connect-src, and it falls back to image pixels when a beacon is
-# blocked or the page is unloading. Note 'unsafe-inline' is NOT here — the gtag
-# config lives in assets/analytics.js precisely so it never has to be.
+# blocked or the page is unloading.
+#
+# The gtag config block is inline because Google's own tag detection scans the
+# page source for it and does not find it in an external file. 'unsafe-inline'
+# is still NOT here: script-src carries the SHA-256 of that exact block, so the
+# browser runs those four lines and nothing else. Change one byte of the snippet
+# and the hash must be regenerated or the tag stops running.
 
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://*.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'sha256-41TyxF2oaQzcXJmNcz/BDcUE7PSQuBElyt9K61GNd8c=' https://*.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -50,8 +55,6 @@
 /assets/boost.js
   Cache-Control: public, max-age=0, must-revalidate
 /assets/nojs.css
-  Cache-Control: public, max-age=0, must-revalidate
-/assets/analytics.js
   Cache-Control: public, max-age=0, must-revalidate
 
 # photography, video and the brand marks — these do not change, cache hard
