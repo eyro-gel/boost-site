@@ -1,15 +1,18 @@
 # Cloudflare Pages redirect rules.
 #
-# Send www to the bare domain so the two can never both serve the site and
-# compete as duplicates. 301, not 302: this is permanent, and search engines
-# only pass ranking through a permanent redirect.
+# These match on PATH only. A rule written against a full URL to send
+# www.boost-tourism.co to the bare domain does not fire — tested with www bound
+# to the project and serving: it returned 200 and the site, not a 301. Sending
+# www to the apex has to be done as a zone-level Redirect Rule in the Cloudflare
+# dashboard, where the hostname is actually available to match on.
 #
-# PREREQUISITE: www.boost-tourism.co must be attached to this Pages project as
-# a second custom domain. Until it is, the hostname does not resolve at all and
-# nothing ever reaches Pages for this rule to act on.
-https://www.boost-tourism.co/*  https://boost-tourism.co/:splat  301
+# Until that rule exists, the two hostnames serve identical pages. The canonical
+# tag on every page points at the apex, so search engines still consolidate
+# there, but a 301 is the thing that actually settles it.
 
-# Nothing here for paths on purpose. Pages already normalises /packages to
-# /packages/, /packages.html to /packages/ and /index.html to / by itself —
-# verified against the live site. Restating those would only add rules that
-# can drift out of step with what Pages does anyway.
+# The pages moved to directory URLs. Pages used to normalise these on its own,
+# but adding 404.html changed that — /packages.html now hits the 404 page — so
+# the old flat paths are mapped explicitly.
+/index.html     /            301
+/packages.html  /packages/   301
+/plans.html     /plans/      301
