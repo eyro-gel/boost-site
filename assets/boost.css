@@ -672,6 +672,9 @@ details[open]:not(.faq-closing) summary{color:var(--navy)}
   border-top:1px solid rgba(255,255,255,.10);font-size:13.5px
 }
 .ftr-bot a{color:rgba(255,255,255,.82);text-decoration:none}
+/* the credit is plain text, not a link, so it keeps the same weight the
+   anchor had without pretending to be clickable */
+.ftr-bot b{color:rgba(255,255,255,.82);font-weight:600}
 .ftr-bot a:hover{color:var(--blue)}
 
 /* ============================ RESPONSIVE ============================ */

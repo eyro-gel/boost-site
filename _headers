@@ -12,9 +12,15 @@
 # inline event handlers — verified. The only external origin is Google Fonts.
 # img-src allows data: for two CSS background SVGs: the hero's route line and
 # the select chevron, which appearance:none removes and this replaces.
+#
+# The Google Analytics origins are Google's own documented CSP list. GA needs
+# three directives, not just script-src: the loader is a script, the measurement
+# beacons are connect-src, and it falls back to image pixels when a beacon is
+# blocked or the page is unloading. Note 'unsafe-inline' is NOT here — the gtag
+# config lives in assets/analytics.js precisely so it never has to be.
 
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://*.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -23,13 +29,41 @@
   Cross-Origin-Resource-Policy: same-origin
   X-Frame-Options: DENY
 
-# fingerprint-free filenames, so revalidate rather than risk serving stale copy
+# Caching is split by how often a file actually changes, because none of these
+# filenames carry a content hash. /assets/* on a 7-day cache meant a CSS edit
+# stayed invisible at the edge for a week after deploying — the deployment was
+# correct and the live hostname still served the old file.
+#
+# These patterns must not overlap: Pages appends the values of every matching
+# rule rather than letting the most specific win, so /assets/* alongside
+# /assets/img/* would produce two max-ages in one header and the first wins.
+
+# markup and code — revalidate, so a deploy is live the moment it lands
 /
   Cache-Control: public, max-age=0, must-revalidate
 /packages/
   Cache-Control: public, max-age=0, must-revalidate
 /plans/
   Cache-Control: public, max-age=0, must-revalidate
+/assets/boost.css
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/boost.js
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/nojs.css
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/analytics.js
+  Cache-Control: public, max-age=0, must-revalidate
 
-/assets/*
+# photography, video and the brand marks — these do not change, cache hard
+/assets/img/*
+  Cache-Control: public, max-age=604800
+/assets/video/*
+  Cache-Control: public, max-age=604800
+/assets/logo-dark.png
+  Cache-Control: public, max-age=604800
+/assets/logo-light.png
+  Cache-Control: public, max-age=604800
+/assets/icon-32.png
+  Cache-Control: public, max-age=604800
+/assets/icon-180.png
   Cache-Control: public, max-age=604800
