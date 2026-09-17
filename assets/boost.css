@@ -675,6 +675,7 @@ details[open]:not(.faq-closing) summary{color:var(--navy)}
 /* the credit is plain text, not a link, so it keeps the same weight the
    anchor had without pretending to be clickable */
 .ftr-bot b{color:rgba(255,255,255,.82);font-weight:600}
+.ftr-legal{display:flex;gap:20px}
 .ftr-bot a:hover{color:var(--blue)}
 
 /* ============================ RESPONSIVE ============================ */
@@ -930,3 +931,48 @@ details[open]:not(.faq-closing) summary{color:var(--navy)}
 .nf .lede{margin:0 auto 30px;max-width:46ch}
 .nf-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
 .nf-links .tlink{margin:0}
+
+/* ==== LEGAL PAGES ==== */
+/* Long-form reading, so the measure is tighter than the marketing pages and the
+   heading scale is flatter — these are scanned for a clause, not read top to
+   bottom, so the numbered headings have to be findable. */
+.legal{padding:clamp(40px,6vw,72px) 0 clamp(60px,8vw,96px)}
+.legal-head{max-width:62ch;margin-bottom:clamp(32px,4vw,48px)}
+.legal-head h1{font-size:clamp(30px,4.2vw,44px);margin:10px 0 14px}
+.legal-meta{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13.5px;color:var(--muted);
+  padding-top:16px;border-top:1px solid var(--line)}
+.legal-meta b{color:var(--ink);font-weight:600}
+.legal-body{max-width:70ch}
+.legal-body section{padding-top:clamp(28px,3vw,38px)}
+.legal-body h2{
+  font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px;
+  display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline;
+}
+.legal-body h2 span{
+  font-family:"Space Grotesk",sans-serif;font-size:13px;font-weight:600;
+  color:var(--blue-deep);font-variant-numeric:tabular-nums;
+}
+.legal-body h3{font-size:15.5px;font-weight:600;margin:20px 0 8px}
+.legal-body p{margin-bottom:12px;font-size:15.5px;line-height:1.66}
+.legal-body ul{margin:0 0 14px;padding-left:0;list-style:none;display:grid;gap:9px}
+.legal-body li{display:grid;grid-template-columns:7px 1fr;gap:13px;align-items:start;font-size:15.5px;line-height:1.6}
+.legal-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--blue);margin-top:10px}
+.legal-body a{color:var(--blue-deep)}
+.legal-body dl{margin:0 0 14px;display:grid;gap:10px}
+.legal-body dt{font-weight:600;color:var(--ink);font-size:15px}
+.legal-body dd{margin:2px 0 0;font-size:15px;line-height:1.6}
+.legal-note{
+  background:var(--soft);border:1px solid var(--line);border-left:3px solid var(--blue);
+  border-radius:12px;padding:18px 20px;margin:26px 0;
+}
+.legal-note p{margin:0;font-size:14.5px;line-height:1.6}
+.legal-note p + p{margin-top:9px}
+.legal-toc{
+  background:var(--soft);border:1px solid var(--line);border-radius:14px;
+  padding:20px 22px;margin-bottom:8px;
+}
+.legal-toc ol{margin:0;padding-left:0;list-style:none;columns:2;column-gap:32px}
+@media (max-width:640px){.legal-toc ol{columns:1}}
+.legal-toc li{font-size:14.2px;line-height:1.5;margin-bottom:7px;break-inside:avoid}
+.legal-toc a{color:var(--body);text-decoration:none}
+.legal-toc a:hover{color:var(--blue-deep)}

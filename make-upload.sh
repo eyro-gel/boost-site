@@ -19,9 +19,11 @@ mkdir -p "$OUT"
 # everything the served site needs, and nothing else
 cp -R assets "$OUT"/
 cp index.html 404.html favicon.ico robots.txt sitemap.xml _headers _redirects "$OUT"/
-mkdir -p "$OUT/packages" "$OUT/plans"
+mkdir -p "$OUT/packages" "$OUT/plans" "$OUT/privacy" "$OUT/terms"
 cp packages/index.html "$OUT/packages"/
 cp plans/index.html "$OUT/plans"/
+cp privacy/index.html "$OUT/privacy"/
+cp terms/index.html "$OUT/terms"/
 
 # strip anything macOS or the editor left behind
 find "$OUT" \( -name '.DS_Store' -o -name '._*' -o -name '*.swp' \) -delete

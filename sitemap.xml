@@ -3,4 +3,6 @@
   <url><loc>https://boost-tourism.co/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://boost-tourism.co/packages/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://boost-tourism.co/plans/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://boost-tourism.co/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://boost-tourism.co/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
