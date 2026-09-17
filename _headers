@@ -18,6 +18,13 @@
 # beacons are connect-src, and it falls back to image pixels when a beacon is
 # blocked or the page is unloading.
 #
+# frame-ancestors names Google's tag tools rather than 'none': Tag Assistant and
+# the GA4 tag check load the page in a frame, and a blanket 'none' makes the tag
+# undetectable however well it is installed. X-Frame-Options is deliberately gone
+# — it only understands DENY/SAMEORIGIN, so it would override the line above and
+# re-block them. frame-ancestors is its modern replacement and every current
+# browser honours it, so clickjacking protection is unchanged for everyone else.
+#
 # The gtag config block is inline because Google's own tag detection scans the
 # page source for it and does not find it in an external file. 'unsafe-inline'
 # is still NOT here: script-src carries the SHA-256 of that exact block, so the
@@ -25,14 +32,13 @@
 # and the hash must be regenerated or the tag stops running.
 
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'sha256-41TyxF2oaQzcXJmNcz/BDcUE7PSQuBElyt9K61GNd8c=' https://*.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self' https://tagassistant.google.com https://www.googletagmanager.com; object-src 'none'; script-src 'self' 'sha256-41TyxF2oaQzcXJmNcz/BDcUE7PSQuBElyt9K61GNd8c=' https://*.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  X-Frame-Options: DENY
 
 # Caching is split by how often a file actually changes, because none of these
 # filenames carry a content hash. /assets/* on a 7-day cache meant a CSS edit
