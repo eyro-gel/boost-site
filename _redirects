@@ -6,9 +6,9 @@
 # www to the apex has to be done as a zone-level Redirect Rule in the Cloudflare
 # dashboard, where the hostname is actually available to match on.
 #
-# Until that rule exists, the two hostnames serve identical pages. The canonical
-# tag on every page points at the apex, so search engines still consolidate
-# there, but a 301 is the thing that actually settles it.
+# That is now handled by the www-redirect Worker in worker-www-redirect/, bound
+# to www.boost-tourism.co/*. Worker routes take precedence over a Pages custom
+# domain on the same hostname, so it wins without unbinding anything.
 
 # The pages moved to directory URLs. Pages used to normalise these on its own,
 # but adding 404.html changed that — /packages.html now hits the 404 page — so

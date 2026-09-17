@@ -1,0 +1,10 @@
+name = "www-redirect"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Bound to the www hostname only. Worker routes take precedence over a Pages
+# custom domain on the same hostname, so this wins without unbinding anything.
+# The apex is not matched and is left completely alone.
+[[routes]]
+pattern = "www.boost-tourism.co/*"
+zone_name = "boost-tourism.co"
